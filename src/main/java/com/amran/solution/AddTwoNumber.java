@@ -4,6 +4,9 @@
  */
 package com.amran.solution;
 
+import java.math.BigInteger;
+import org.junit.Assert;
+
 /**
  *
  * @author Amran Hossain
@@ -26,17 +29,18 @@ package com.amran.solution;
  *
  * Psuedocode:
  *
- * Create a dummy node which is the head of new linked list. 
- * Create a node temp,initialise it with dummy. 
- * Initialize carry to 0. 
- * Loop through lists l1 and l2 until you reach both ends, and until carry is present. 
- *  Set sum=l1.val+ l2.val + carry. 
- *  Update carry=sum/10. 
- *  Create a new node with the digit value of(sum%10) and set it to temp node’s next, then advance temp node to next.
- *  Advance both l1 and l2. 
- * Return dummy’s next node.
+ * Create a dummy node which is the head of new linked list. Create a node
+ * temp,initialise it with dummy. Initialize carry to 0. Loop through lists l1
+ * and l2 until you reach both ends, and until carry is present. Set sum=l1.val+
+ * l2.val + carry. Update carry=sum/10. Create a new node with the digit value
+ * of(sum%10) and set it to temp node’s next, then advance temp node to next.
+ * Advance both l1 and l2. Return dummy’s next node.
  */
 public class AddTwoNumber {
+
+    public AddTwoNumber() {
+        test();
+    }
 
     public class ListNode {
 
@@ -86,11 +90,80 @@ public class AddTwoNumber {
         return dummy.next;
     }
 
+    void test() {
+
+        Assert.assertEquals(new BigInteger("807"),
+                toInt(addTwoNumbers(reverse(get(new int[]{3, 4, 2})), reverse(get(new int[]{4, 6, 5})))));
+
+        Assert.assertEquals(new BigInteger("10009998"),
+                toInt(addTwoNumbers(reverse(get(new int[]{9, 9, 9, 9, 9, 9, 9})), reverse(get(new int[]{9, 9, 9, 9})))));
+
+        Assert.assertEquals(new BigInteger("10407"),
+                toInt(addTwoNumbers(reverse(get(new int[]{9, 4, 2})), reverse(get(new int[]{9, 4, 6, 5})))));
+
+    }
+
+    ListNode reverse(ListNode node) {
+        ListNode prev = null;
+        while (node != null) {
+            ListNode tmp = node.next;
+            node.next = prev;
+            prev = node;
+            node = tmp;
+        }
+        return prev;
+    }
+
+    ListNode get(int[] data) {
+        ListNode root = new ListNode(data[0]);
+        ListNode node = root;
+        for (int i = 1; i < data.length; i++) {
+            node.next = new ListNode(data[i]);
+            node = node.next;
+        }
+        return root;
+    }
+
+    // input: linked list of digits backwards
+    BigInteger toInt(ListNode node) {
+        BigInteger result = BigInteger.ZERO;
+        int pow = 0;
+        while (node != null) {
+            BigInteger multiplier = BigInteger.valueOf(10);
+            multiplier = multiplier.pow(pow);
+            result = result.add(BigInteger.valueOf(node.val).multiply(multiplier));
+            node = node.next;
+            pow++;
+        }
+        return result;
+    }
+
+    void print(ListNode node, String title) {
+        StringBuilder sb = new StringBuilder();
+        while (node != null) {
+            if (sb.length() > 0) {
+                sb.append("->");
+            }
+            sb.append(node.val);
+            node = node.next;
+        }
+        log(title + sb);
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new AddTwoNumber();
+    }
+
+    public static void l(Object obj) {
+        System.out.print(obj);
+    }
+
+    public static void log(Object obj) {
+        System.out.println(obj);
+        System.out.flush();
     }
 
 }
@@ -102,38 +175,21 @@ public class AddTwoNumber {
  * Space Complexity: O(max(m,n)). The length of the new list is at most
  * max(m,n)+1.
  */
-
-
 // Optimized Solution:
-
 /**
- * public static final ListNode addTwoNumbers(
-        ListNode l1, 
-        ListNode l2
-    ) {
-        int left = 0;
-        ListNode sentinel = new ListNode(0);
-        ListNode tail = sentinel;
-
-        while (!(l1 == null && l2 == null && left == 0)) {
-            final int add1 = l1 != null ? l1.val : 0;
-            final int add2 = l2 != null ? l2.val : 0;
-            final int sum = add1 + add2 + left;
-            left = sum / 10;
-            final ListNode tempNode = new ListNode(sum % 10);
-            tail.next = tempNode;
-            tail = tempNode;
-
-            if (l1 != null) {
-                l1 = l1.next;
-            }
-
-            if (l2 != null) {
-                l2 = l2.next;
-            }
-
-        }
-
-        return sentinel.next;
-    }
+ * public static final ListNode addTwoNumbers( ListNode l1, ListNode l2 ) { int
+ * left = 0; ListNode sentinel = new ListNode(0); ListNode tail = sentinel;
+ *
+ * while (!(l1 == null && l2 == null && left == 0)) { final int add1 = l1 !=
+ * null ? l1.val : 0; final int add2 = l2 != null ? l2.val : 0; final int sum =
+ * add1 + add2 + left; left = sum / 10; final ListNode tempNode = new
+ * ListNode(sum % 10); tail.next = tempNode; tail = tempNode;
+ *
+ * if (l1 != null) { l1 = l1.next; }
+ *
+ * if (l2 != null) { l2 = l2.next; }
+ *
+ * }
+ *
+ * return sentinel.next; }
  */
