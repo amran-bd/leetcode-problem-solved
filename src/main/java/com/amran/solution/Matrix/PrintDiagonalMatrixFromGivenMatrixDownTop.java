@@ -34,7 +34,7 @@ import java.util.List;
  *
  * Complexity is O(n*m), Space Complexity O(1)
  */
-public class PrintDiagonalMatrixFromGivenMatrix {
+public class PrintDiagonalMatrixFromGivenMatrixDownTop {
 
     /**
      * @param args the command line arguments
