@@ -20,6 +20,19 @@ For example, input
 Output has to be: 1 A2 5B5 76Q B8N NK3 RB 1 as a result (with or without spaces, doesn’t matter)
 
 1, 2A, 5b5,
+
+Solutions Findings:
+
+This matrix show why shift could be a solution for the problem
+
+(0,0)		
+(0,1)	(1,0)	
+(0,2)	(1,1)	(2,0)
+(0,3)	(1,2)	(2,1)
+(0,4)	(1,3)	(2,2)
+(0,5)	(1,4)	(2,3)
+(1,5)	(2,4)
+(2,5)
 */
 public class PrintDiagonalMatrixFromGivenMatrixTopToDown {
 
