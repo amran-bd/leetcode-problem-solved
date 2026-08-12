@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.amran.solution.arrays;
+package com.amran.solution.arrays_dsa;
 
 import java.util.ArrayList;
 
