@@ -34,7 +34,7 @@ public class MNGenerateMatrixSpiralOrder {
     public static void main(String[] args) {
         int[] head = {3, 0, 2, 6, 8, 1, 7, 9, 4, 2, 5, 5, 0};
         int m = 3, n = 5;
-        System.out.println(Arrays.deepToString(MNMatrixSpiralOrder(m, n,head)));
+        //System.out.println(Arrays.deepToString(MNMatrixSpiralOrder(m, n,head)));
     }
     
     /*
